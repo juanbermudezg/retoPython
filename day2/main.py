@@ -32,15 +32,33 @@ def isValidCellphone(number):
             pass
         else:
            bandera = False
+    if (len(number)>=10):
+        pass
+    else:
+        bandera=False
     return bandera   
+def isValidText(txt):
+    text=formatText(txt)
+    if (len(text)>=5 and len(text)<=50):
+        return True
+    else:
+        return False
 print("Hola bienvenido al primer reto de Código facilito.")
 cantidadUsuarios = int(input('Digite la cantidad de usuarios a registrar: '))
 usuariosLista = []
 for i in range(cantidadUsuarios):
     name = input('Escriba su nombre: ')
-    name= formatText(name)
+    name = formatText(name)
+    while(not isValidText(name)):
+        system("cls")
+        print("Lo siento, no cumple con los requisitos minimos")
+        name = input('Escriba su nombre: ')
     surname = input('Escriba su apellido: ')
-    surname= formatText(surname)
+    surname = formatText(surname)
+    while(not isValidText(surname)):
+        system("cls")
+        print("Lo siento, no cumple con los requisitos minimos")
+        name = input('Escriba su apellido: ')
     cellphone = input('Escriba su número celular indicando el código del pais <+573142796777>: ')
     while (not isValidCellphone(cellphone)):
         system("cls")
@@ -58,5 +76,5 @@ for i in range(cantidadUsuarios):
         'email': email
     }
     usuariosLista.append(usuario)
-print(usuariosLista)
-print("Hola",name,surname,"en breve recibirás un correo a", email,".")
+for i in range(len(usuariosLista)):
+    print("Hola",usuariosLista[i]['name'],usuariosLista[i]['surname'],"en breve recibirás un correo a", usuariosLista[i]['email'],".")
