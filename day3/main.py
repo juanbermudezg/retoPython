@@ -1,15 +1,13 @@
 """
-Para este segundo reto de la semana tu objetivo será incrementar el funcionamiento del programa del día de ayer.
-Si recordamos, ayer construimos un programa en Python capaz de registrar un nuevo usuario en el sistema.
-Pues bien, continuando con el proyecto, el reto de hoy será que podremos registrar un N cantidad de nuevos usuarios.
-Para esto el programa deberá preguntar cuando nuevos usuarios se pretenden registrar.
-Si el por ejemplo coloco 5, bueno, serán 5 nuevos usuarios los que se deben capturar, usuarios con sus correspondientes valores:
-Nombre, apellidos, número de teléfono y correo electrónico.
-Además de todo esto, añadiremos una capa extra de seguridad, implementando un par de validaciones sobre los valores que se pueden ingresar.
-Validaremos que, tanto nombre, apellidos como correo electrónico tengan una longitud mínimo de 5 caracteres y un longitud máxima de 50.
-Así mismo el número de teléfono será a 10 dígitos.
-Si por alguna razón el usuario ingresa mal alguno de estos datos, el programa deberá notificarle y no permitirá continuar hasta que
-se ingresen datos correctos.
+Vaya, ya llegamos al reto número 3 de la semana, y para este tercer reto lo que haremos será añadir 2 nuevas
+funcionalidades a nuestro programa de registro de usuarios.
+Estas funcionalidades son las siguientes.
+1.- Siempre que se registre un nuevo usuario de forma exitosa generaremos un identificador único para este registro/usuario.
+Te recomiendo sea un ID numérico auto incremental, que comience en 1 hasta N. Sin embargo siéntete libre elegir el formato o tipo que tú desees.
+2.- Todos estos nuevos identificadores deberán almacenarse en un listado que será impreso en consola cuando todos
+los registros se hayan creado. Esto de tal forma que el usuario pueda conocer y tenga certeza que las operaciones, en efecto, se realizaron de forma exitosa.
+Con estas 2 nuevas funcionalidades es probable te intuyas como iremos finalizando nuestro programa para el quinto día.
+Entrega tu ejercicio aquí
 Resuelto por @juanbermudezg https://github.com/juanbermudezg
 """
 import re
@@ -79,8 +77,25 @@ def saveUser():
         usuariosLista.append(usuario)
         contador+=1
     return usuariosLista
+def showUsers(usersList):
+    for i in range(len(listaUsuarios)):
+        print("Hola",listaUsuarios[i]['name'],listaUsuarios[i]['surname'],"con ID",listaUsuarios[i]['id'],"en breve recibirás un correo a", listaUsuarios[i]['email']+".")
+def showIDs(usersList):
+    for i in range(len(listaUsuarios)):
+        print("ID",listaUsuarios[i]['id'])
 print("Hola bienvenido al primer reto de Código facilito.")
 cantidadUsuarios = int(input('Digite la cantidad de usuarios a registrar: '))
 listaUsuarios = saveUser()
-for i in range(len(listaUsuarios)):
-    print("Hola",listaUsuarios[i]['name'],listaUsuarios[i]['surname'],"con ID",listaUsuarios[i]['id'],"en breve recibirás un correo a", listaUsuarios[i]['email']+".")
+bandera = True
+while bandera == True:
+    option = int(input('¿Quiere ver solo los usuarios <1> o el mensaje predeterminado de todos <2>?: '))
+    if option == 1:
+        showIDs(listaUsuarios)
+        break
+    elif option == 2:
+        showUsers(listaUsuarios)
+        break
+    else:
+        print('Mala eleccion')
+        bandera = False
+print("Gracias por usar el programa")
